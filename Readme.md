@@ -7,7 +7,7 @@ Welcome to my personal cybersecurity portfolio! This project is designed to show
 
 ## 🌐 Live Demo
 
-> https://surajapar.github.io/Personal-Portfolio/
+> https://surajapar.github.io
 
 
 
