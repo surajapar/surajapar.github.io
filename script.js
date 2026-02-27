@@ -1,244 +1,207 @@
 document.addEventListener('DOMContentLoaded', () => {
+            
+            /* =========================================
+               1. Theme Toggle (Light/Dark Mode)
+            ========================================= */
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeToggleMobileBtn = document.getElementById('theme-toggle-mobile');
+            const htmlElement = document.documentElement;
 
-    // --- Smooth Scrolling for Nav Links ---
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-                // Close mobile menu if open after clicking a link
-                if (mobileMenu.classList.contains('open')) {
-                    toggleMobileMenu();
-                }
-            }
-        });
-    });
-
-    // --- Mobile Menu Toggle ---
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuIcon = document.getElementById('menu-icon');
-    const closeIcon = document.getElementById('close-icon');
-
-    const toggleMobileMenu = () => {
-        mobileMenu.classList.toggle('open');
-        mobileMenu.classList.toggle('hidden'); // Toggle visibility
-        menuIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
-        // Toggle aria-expanded attribute for accessibility
-        const isExpanded = mobileMenu.classList.contains('open');
-        mobileMenuButton.setAttribute('aria-expanded', isExpanded);
-    };
-
-    if (mobileMenuButton && mobileMenu && menuIcon && closeIcon) {
-        mobileMenuButton.addEventListener('click', toggleMobileMenu);
-        // Close menu if clicking outside (optional)
-        // document.addEventListener('click', (event) => {
-        //     if (!mobileMenu.contains(event.target) && !mobileMenuButton.contains(event.target) && mobileMenu.classList.contains('open')) {
-        //         toggleMobileMenu();
-        //     }
-        // });
-    } else {
-        console.error("Mobile menu elements not found");
-    }
-
-
-    // --- Hero Typing Effect ---
-    const typingElement = document.getElementById('typing-effect');
-    if (typingElement) {
-        const typingPhrases = [
-            "Cyber Defender",
-            "Security Researcher",
-            "Ethical Hacker",
-            "Penetration Tester",
-        ];
-        let phraseIndex = 0;
-        let letterIndex = 0;
-        let isDeleting = false;
-        const typingSpeed = 150;
-        const deletingSpeed = 75;
-        const pauseDuration = 1500; // Reduced from 2000
-
-        function type() {
-            const currentPhrase = typingPhrases[phraseIndex];
-            let displayText = '';
-
-            if (isDeleting) {
-                // Deleting
-                displayText = currentPhrase.substring(0, letterIndex - 1);
-                letterIndex--;
+            // Check local storage or system preference
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                htmlElement.classList.add('dark');
             } else {
-                // Typing
-                displayText = currentPhrase.substring(0, letterIndex + 1);
-                letterIndex++;
+                htmlElement.classList.remove('dark');
             }
 
-            typingElement.textContent = displayText;
-
-            let typeSpeed = isDeleting ? deletingSpeed : typingSpeed;
-
-            if (!isDeleting && letterIndex === currentPhrase.length) {
-                // Pause at end of phrase
-                typeSpeed = pauseDuration;
-                isDeleting = true;
-            } else if (isDeleting && letterIndex === 0) {
-                // Finished deleting, move to next phrase
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % typingPhrases.length;
-                typeSpeed = typingSpeed; // Start typing next word immediately or add pause
-            }
-
-            setTimeout(type, typeSpeed);
-        }
-
-        setTimeout(type, typingSpeed); // Start the effect
-    } else {
-        console.error("Typing effect element not found");
-    }
-
-
-    // --- Contact Form Handling ---
-    const contactForm = document.getElementById('contact-form');
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const messageInput = document.getElementById('message');
-    const submitButton = document.getElementById('submit-button');
-    const formStatusDiv = document.getElementById('form-status');
-    const nameError = document.getElementById('name-error');
-    const emailError = document.getElementById('email-error');
-    const messageError = document.getElementById('message-error');
-
-    const clearErrors = () => {
-        nameError.textContent = '';
-        emailError.textContent = '';
-        messageError.textContent = '';
-        nameInput.classList.remove('error');
-        emailInput.classList.remove('error');
-        messageInput.classList.remove('error');
-         formStatusDiv.innerHTML = ''; // Clear previous status messages
-    };
-
-    const showStatusMessage = (message, type) => {
-        let iconSvg = '';
-         let cssClass = '';
-
-         if (type === 'success') {
-             iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
-             cssClass = 'form-success';
-         } else if (type === 'error') {
-             iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`;
-             cssClass = 'form-error-submit';
-         }
-
-        formStatusDiv.innerHTML = `
-            <div class="form-status-message ${cssClass}">
-                ${iconSvg}
-                <span>${message}</span>
-            </div>`;
-    };
-
-     const validateForm = () => {
-         clearErrors();
-         let isValid = true;
-         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-
-         if (!nameInput.value.trim()) {
-             nameError.textContent = 'Name is required';
-             nameInput.classList.add('error');
-             isValid = false;
-         }
-         if (!emailInput.value.trim()) {
-             emailError.textContent = 'Email is required';
-             emailInput.classList.add('error');
-             isValid = false;
-         } else if (!emailRegex.test(emailInput.value)) {
-             emailError.textContent = 'Invalid email address';
-             emailInput.classList.add('error');
-             isValid = false;
-         }
-         if (!messageInput.value.trim()) {
-             messageError.textContent = 'Message is required';
-             messageInput.classList.add('error');
-             isValid = false;
-         }
-         return isValid;
-     };
-
-
-    if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            clearErrors();
-
-            if (!validateForm()) {
-                return;
-            }
-
-            // --- Show Loading State ---
-            const originalButtonText = submitButton.innerHTML;
-            submitButton.disabled = true;
-             submitButton.innerHTML = `
-                 <span class="loader"></span> Submitting...
-             `;
-            formStatusDiv.innerHTML = ''; // Clear previous status
-
-
-            // --- Simulate API Call ---
-            // Replace this with your actual fetch call to a backend endpoint
-            try {
-                // Simulate network delay
-                await new Promise(resolve => setTimeout(resolve, 1500));
-
-                // Simulate success (in real app, check response status)
-                const success = true; // Math.random() > 0.2; // Simulate occasional errors
-
-                if (success) {
-                    showStatusMessage('Message sent successfully!', 'success');
-                    contactForm.reset(); // Clear form fields
+            // Toggle function
+            const toggleTheme = () => {
+                if (htmlElement.classList.contains('dark')) {
+                    htmlElement.classList.remove('dark');
+                    localStorage.theme = 'light';
                 } else {
-                    // Simulate an error
-                     throw new Error("Simulated server error");
+                    htmlElement.classList.add('dark');
+                    localStorage.theme = 'dark';
                 }
+            };
 
-            } catch (error) {
-                console.error('Form submission failed:', error);
-                showStatusMessage('Failed to send message. Please try again.', 'error');
-            } finally {
-                // Restore button state
-                submitButton.disabled = false;
-                submitButton.innerHTML = originalButtonText;
+            themeToggleBtn.addEventListener('click', toggleTheme);
+            themeToggleMobileBtn.addEventListener('click', toggleTheme);
 
-                 // Optionally clear status message after a few seconds
-                 setTimeout(() => {
-                     if (formStatusDiv.querySelector('.form-success')) { // Only clear success message automatically
-                         formStatusDiv.innerHTML = '';
-                     }
-                 }, 5000); // Clear after 5 seconds
+
+            /* =========================================
+               2. Mobile Menu Toggle
+            ========================================= */
+            const mobileBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            const menuIcon = mobileBtn.querySelector('i');
+
+            function toggleMenu() {
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.classList.toggle('flex');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuIcon.classList.replace('ph-x', 'ph-list');
+                } else {
+                    menuIcon.classList.replace('ph-list', 'ph-x');
+                }
             }
+
+            mobileBtn.addEventListener('click', toggleMenu);
+            mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
+
+
+            /* =========================================
+               3. Navbar Scroll Effect (Glassmorphism)
+            ========================================= */
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('shadow-md');
+                    navbar.classList.remove('py-4');
+                    navbar.classList.add('py-3');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                    navbar.classList.remove('py-3');
+                    navbar.classList.add('py-4');
+                }
+            });
+
+
+            /* =========================================
+               4. Scroll Reveal Animation
+            ========================================= */
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional: unobserve if you only want it to animate once
+                        // observer.unobserve(entry.target); 
+                    }
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => revealOnScroll.observe(el));
+
+
+            /* =========================================
+               5. Hero Typing Effect
+            ========================================= */
+            const typingElement = document.getElementById('typing-effect');
+            if (typingElement) {
+                const phrases = ["Cyber Defender", "Security Researcher", "Ethical Hacker", "Penetration Tester"];
+                let phraseIndex = 0;
+                let letterIndex = 0;
+                let isDeleting = false;
+                
+                function type() {
+                    const currentPhrase = phrases[phraseIndex];
+                    let displayText = '';
+                    
+                    if (isDeleting) {
+                        displayText = currentPhrase.substring(0, letterIndex - 1);
+                        letterIndex--;
+                    } else {
+                        displayText = currentPhrase.substring(0, letterIndex + 1);
+                        letterIndex++;
+                    }
+
+                    typingElement.textContent = displayText;
+
+                    let typeSpeed = isDeleting ? 75 : 150;
+
+                    if (!isDeleting && letterIndex === currentPhrase.length) {
+                        typeSpeed = 2000; // Pause at the end of word
+                        isDeleting = true;
+                    } else if (isDeleting && letterIndex === 0) {
+                        isDeleting = false;
+                        phraseIndex = (phraseIndex + 1) % phrases.length;
+                        typeSpeed = 300; // Pause before typing next word
+                    }
+
+                    setTimeout(type, typeSpeed);
+                }
+                setTimeout(type, 150);
+            }
+
+            /* =========================================
+               6. Fetch Medium Blog Posts
+            ========================================= */
+            const blogContainer = document.getElementById('blog-container');
+            const mediumFeedUrl = 'https://medium.com/feed/@surajapar';
+            // Using rss2json API to convert Medium RSS to JSON
+            const rss2jsonUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(mediumFeedUrl)}`;
+
+            // Helper to strip HTML tags from excerpts
+            const stripHtml = (html) => {
+                let doc = new DOMParser().parseFromString(html, 'text/html');
+                return doc.body.textContent || "";
+            };
+
+            // Format Date
+            const formatDate = (dateString) => {
+                const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                return new Date(dateString).toLocaleDateString(undefined, options);
+            };
+
+            fetch(rss2jsonUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'ok' && data.items.length > 0) {
+                        blogContainer.innerHTML = ''; // Clear skeletons
+                        
+                        // Limit to 3 posts
+                        const posts = data.items.slice(0, 3);
+                        
+                        posts.forEach(post => {
+                            // Medium sometimes doesn't provide a direct thumbnail in the rss2json parsing.
+                            // We attempt to extract the first image from the content if thumbnail is empty.
+                            let imageUrl = post.thumbnail;
+                            if (!imageUrl) {
+                                const imgRegex = /<img[^>]+src="([^">]+)"/;
+                                const match = post.content.match(imgRegex);
+                                imageUrl = match ? match[1] : 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800'; // Fallback cyber image
+                            }
+
+                            const excerpt = stripHtml(post.description).substring(0, 120) + '...';
+                            const tags = post.categories.slice(0, 2).map(tag => 
+                                `<span class="bg-slate-100 dark:bg-slate-800 text-brand-light dark:text-brand-dark px-2 py-1 rounded text-xs font-mono border border-slate-200 dark:border-slate-700">${tag}</span>`
+                            ).join('');
+
+                            const cardHtml = `
+                                <a href="${post.link}" target="_blank" class="flex flex-col bg-surface-light dark:bg-surface-dark rounded-xl shadow-lg border border-slate-200 dark:border-slate-800 overflow-hidden hover:-translate-y-2 transition-transform duration-300 group">
+                                    <div class="h-48 overflow-hidden relative">
+                                        <div class="absolute inset-0 bg-brand-light/10 dark:bg-brand-dark/20 group-hover:bg-transparent transition-colors z-10"></div>
+                                        <img src="${imageUrl}" alt="${post.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                                    </div>
+                                    <div class="p-6 flex flex-col flex-1">
+                                        <div class="flex items-center justify-between mb-3 text-xs text-slate-500 dark:text-slate-400 font-mono">
+                                            <span><i class="ph ph-calendar-blank"></i> ${formatDate(post.pubDate)}</span>
+                                        </div>
+                                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-brand-light dark:group-hover:text-brand-dark transition-colors line-clamp-2">${post.title}</h3>
+                                        <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 line-clamp-3 flex-1">${excerpt}</p>
+                                        <div class="flex flex-wrap gap-2 mt-auto">
+                                            ${tags}
+                                        </div>
+                                    </div>
+                                </a>
+                            `;
+                            blogContainer.innerHTML += cardHtml;
+                        });
+                    } else {
+                        blogContainer.innerHTML = `<p class="text-slate-500 dark:text-slate-400 col-span-full">No articles found at the moment. Please check back later.</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching blog posts:', error);
+                    blogContainer.innerHTML = `<p class="text-red-500 col-span-full">Failed to load articles. You can visit <a href="${mediumFeedUrl}" class="underline" target="_blank">my Medium profile</a> directly.</p>`;
+                });
+
+
+            /* =========================================
+               7. Footer Year
+            ========================================= */
+            document.getElementById('year').textContent = new Date().getFullYear();
         });
-
-         // Clear errors on input
-         [nameInput, emailInput, messageInput].forEach(input => {
-             input.addEventListener('input', () => {
-                 if (input.classList.contains('error')) {
-                     const errorElement = document.getElementById(`${input.id}-error`);
-                     if (errorElement) errorElement.textContent = '';
-                     input.classList.remove('error');
-                 }
-             });
-         });
-
-    } else {
-         console.error("Contact form element not found");
-    }
-
-    // --- Footer Year ---
-    const yearSpan = document.getElementById('current-year');
-    if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-    }
-});

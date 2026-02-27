@@ -1,385 +1,506 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suraj Apar - Cybersecurity Portfolio</title>
-    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <title>Suraj Apar | Cybersecurity Portfolio</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Personal cybersecurity portfolio of Suraj Apar. Aspiring Cybersecurity Intern specializing in Web Security and SOC Foundations.">
+    <meta name="keywords" content="Suraj Apar, Cybersecurity, Portfolio, TryHackMe, Ethical Hacker, Penetration Tester, Web Security, Medium">
+    <link rel="icon" type="image/x-icon" href="img/icon.png"> <!-- Assuming icon.png exists from your files -->
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind CSS (via CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Enables toggleable dark mode
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            light: '#0284c7', // Darker blue for light mode
+                            dark: '#38bdf8',  // Light blue for dark mode
+                        },
+                        surface: {
+                            light: '#ffffff',
+                            dark: '#1e293b',
+                        },
+                        bg: {
+                            light: '#f8fafc',
+                            dark: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    boxShadow: {
+                        'glass': '0 4px 30px rgba(0, 0, 0, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS Styles -->
+    
 </head>
-<body class="bg-gray-900 text-gray-300 font-sans">
+<body class="bg-bg-light text-slate-900 dark:bg-bg-dark dark:text-slate-200 antialiased selection:bg-brand-light/30 dark:selection:bg-brand-dark/30">
 
-    <header class="bg-gray-900-opaque backdrop-blur sticky top-0 z-50 border-b border-gray-800">
-        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="#home" class="text-2xl font-bold text-white">CyberSec</a>
+    <!-- Navigation -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-300 glass-nav bg-white/70 dark:bg-slate-900/70 border-b border-slate-200 dark:border-slate-800" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            
+            <!-- Logo -->
+            <a href="#home" class="text-2xl font-bold tracking-tighter flex items-center gap-2 group">
+                <div class="bg-brand-light/10 dark:bg-brand-dark/10 p-1.5 rounded-lg group-hover:bg-brand-light/20 dark:group-hover:bg-brand-dark/20 transition-colors">
+                    <i class="ph-fill ph-terminal-window text-brand-light dark:text-brand-dark"></i>
+                </div>
+                <span class="font-mono text-slate-900 dark:text-white">Cyber<span class="text-brand-light dark:text-brand-dark">Sec</span><span class="text-brand-light dark:text-brand-dark animate-pulse">_</span></span>
+            </a>
 
-            <nav class="hidden md:flex space-x-6" id="desktop-nav">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#certifications" class="nav-link">Certifications</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#contact" class="nav-link">Contact</a>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-sm font-medium hover:text-brand-light dark:hover:text-brand-dark transition-colors">About</a>
+                <a href="#skills" class="text-sm font-medium hover:text-brand-light dark:hover:text-brand-dark transition-colors">Skills</a>
+                <a href="#projects" class="text-sm font-medium hover:text-brand-light dark:hover:text-brand-dark transition-colors">Projects</a>
+                <a href="#blog" class="text-sm font-medium hover:text-brand-light dark:hover:text-brand-dark transition-colors">Blog</a>
+                <a href="#certifications" class="text-sm font-medium hover:text-brand-light dark:hover:text-brand-dark transition-colors">Certifications</a>
+                
+                <!-- Resume Button -->
+                <a href="resume.pdf" target="_blank" class="px-5 py-2 text-sm font-medium text-brand-light dark:text-brand-dark border border-brand-light/50 dark:border-brand-dark/50 rounded-full hover:bg-brand-light/10 dark:hover:bg-brand-dark/10 transition-all flex items-center gap-2">
+                    <i class="ph ph-file-pdf"></i> Resume
+                </a>
+
+                <!-- Theme Toggle -->
+                <button id="theme-toggle" aria-label="Toggle Dark Mode" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                    <i class="ph ph-moon text-xl dark:hidden"></i>
+                    <i class="ph ph-sun text-xl hidden dark:block text-yellow-400"></i>
+                </button>
             </nav>
 
-            <div class="md:hidden">
-                <button id="mobile-menu-button" aria-label="Toggle Menu" class="text-gray-300 hover:text-white p-2">
-                    <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                    <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6 hidden"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            <!-- Mobile Controls -->
+            <div class="flex items-center gap-4 md:hidden">
+                <button id="theme-toggle-mobile" aria-label="Toggle Dark Mode" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                    <i class="ph ph-moon text-xl dark:hidden"></i>
+                    <i class="ph ph-sun text-xl hidden dark:block text-yellow-400"></i>
+                </button>
+                <button id="mobile-menu-btn" class="focus:outline-none">
+                    <i class="ph ph-list text-3xl"></i>
                 </button>
             </div>
         </div>
 
-        <nav id="mobile-menu" class="mobile-menu hidden md:hidden bg-gray-900 border-b border-gray-800 px-4 py-4">
-            <div class="flex flex-col space-y-4">
-                <a href="#home" class="nav-link mobile-nav-link">Home</a>
-                <a href="#about" class="nav-link mobile-nav-link">About</a>
-                <a href="#skills" class="nav-link mobile-nav-link">Skills</a>
-                <a href="#certifications" class="nav-link mobile-nav-link">Certifications</a>
-                <a href="#projects" class="nav-link mobile-nav-link">Projects</a>
-                <a href="#contact" class="nav-link mobile-nav-link">Contact</a>
-            </div>
-        </nav>
+        <!-- Mobile Nav Dropdown -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-xl flex-col">
+            <a href="#about" class="mobile-link px-6 py-4 border-b border-slate-100 dark:border-slate-800 hover:text-brand-light dark:hover:text-brand-dark transition-colors">About</a>
+            <a href="#skills" class="mobile-link px-6 py-4 border-b border-slate-100 dark:border-slate-800 hover:text-brand-light dark:hover:text-brand-dark transition-colors">Skills</a>
+            <a href="#projects" class="mobile-link px-6 py-4 border-b border-slate-100 dark:border-slate-800 hover:text-brand-light dark:hover:text-brand-dark transition-colors">Projects</a>
+            <a href="#blog" class="mobile-link px-6 py-4 border-b border-slate-100 dark:border-slate-800 hover:text-brand-light dark:hover:text-brand-dark transition-colors">Blog</a>
+            <a href="#certifications" class="mobile-link px-6 py-4 border-b border-slate-100 dark:border-slate-800 hover:text-brand-light dark:hover:text-brand-dark transition-colors">Certifications</a>
+            <a href="#contact" class="mobile-link px-6 py-4 hover:text-brand-light dark:hover:text-brand-dark transition-colors">Contact</a>
+        </div>
     </header>
 
-    <section id="home" class="bg-gradient-dark pt-16">
-        <div class="container mx-auto px-4 text-center py-20">
-            <div class="fade-in">
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">
-                    Hi, I'm <span class="text-blue-400">Suraj</span>
-                </h1>
-                <h2 class="text-2xl md:text-3xl text-gray-300 mb-6">
-                    Future <span class="typing-effect text-blue-400" id="typing-effect"></span><span class="cursor">&nbsp;</span>
-                </h2>
-                <p class="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-8">
-                    Cybersecurity student passionate about ethical hacking, network security,
-                    and protecting digital systems from threats.
-                </p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <a href="#contact" class="btn btn-primary bg-blue-600 hover:bg-blue-700 text-white">Contact Me</a>
-                    <a href="#projects" class="btn btn-secondary bg-gray-700 hover:bg-gray-800 text-blue-400">View Projects</a>
-                    <a href="resume.html" target="_blank" rel="noopener noreferrer" class="btn btn-tertiary bg-green-600 hover:bg-green-700 text-white">
-                        <span style="font-family:monospace;font-weight:bold;">&lt;/&gt;</span> Resume
-                    </a>
-                    <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-tertiary bg-yellow-500 hover:bg-yellow-600 text-gray-900">
-                        📄 Resume
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center pt-20 relative overflow-hidden">
+            <!-- Background Decorations -->
+            <div class="absolute top-1/4 left-10 w-72 h-72 bg-brand-light/10 dark:bg-brand-dark/10 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
+            <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-indigo-500/10 dark:bg-green-500/10 rounded-full blur-[100px] -z-10 pointer-events-none"></div>
 
-    <main class="container mx-auto px-4 py-16">
-
-        <section id="about" class="section-mb">
-            <h2 class="section-title"><span class="icon">👤</span> About Me</h2>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <p class="text-gray-400 mb-4">
-                        Hello! I'm Suraj Apar, a highly motivated cybersecurity student currently pursuing a Bachelor of Science in Cyber and Digital Science at Dr. D. Y. Patil Arts, Commerce & Science College, Pimpri, Pune, affiliated with Savitribai Phule Pune University.
+            <div class="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 reveal">
+                    <p class="font-mono text-brand-light dark:text-brand-dark text-sm md:text-base font-semibold">sys.stdout.write("Hi, I'm")</p>
+                    <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+                        Suraj Apar.
+                    </h1>
+                    <h2 class="text-2xl md:text-4xl font-bold text-slate-600 dark:text-slate-400 h-10 md:h-12 flex items-center">
+                        Future&nbsp;<span id="typing-effect" class="text-brand-light dark:text-brand-dark"></span><span class="cursor text-brand-light dark:text-brand-dark"></span>
+                    </h2>
+                    <p class="text-lg max-w-lg pt-4 leading-relaxed text-slate-600 dark:text-slate-400">
+                        Cybersecurity student passionate about ethical hacking, network security, and protecting digital systems from threats.
                     </p>
-                    <p class="text-gray-400 mb-4">
-                        I'm deeply passionate about securing digital systems and networks, and I'm committed to continuous learning in this ever-evolving field. My goal is to leverage my skills and knowledge to protect organizations from cyber threats and contribute to a safer digital world.
-                    </p>
-                    <p class="text-gray-400">
-                        I am eager to apply my academic foundation and hands-on experience to real-world cybersecurity challenges.
-                    </p>
-                </div>
-                <div class="hidden md:block">
-                    <img
-                        src="img/avatar.png"
-                        style="width: 150px; height: 150px;"
-                        alt="About Me Placeholder"
-                        class="rounded-lg shadow-lg border border-gray-700 w-64 h-64 object-cover"
-                    />
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" class="section-mb">
-            <h2 class="section-title"><span class="icon">💻</span> Skills</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <div class="skill-card">
-                    <h4 class="skill-card-title">Tools</h4>
-                    <ul class="skill-list">
-                        <li>Linux</li>
-                        <li>Metasploit</li>
-                        <li>Burp Suite</li>
-                        <li>SQLMap</li>
-                    </ul>
-                </div>
-                <div class="skill-card">
-                    <h4 class="skill-card-title">Techniques</h4>
-                    <ul class="skill-list">
-                        
-                        <li>Cybersecurity</li>
-                        <li>Information Security Awareness</li>
-                        <li>Threat Analysis</li>
-                        <li>System Safeguards</li>
-                        <li>Network Defense</li>
-                        <li>General Cyber</li>
-                        <li>Security Analysis</li>
-                    </ul>
-                </div>
-                <div class="skill-card">
-                     <h4 class="skill-card-title">Programming</h4>
-                     <ul class="skill-list">
-                         <li>Python</li>
-                         <li>C</li>
-                     </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="certifications" class="py-20 bg-gray-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 class="section-title"><span class="icon">🛡️</span> Certifications & Badges</h2>
-					<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="mb-8"></div>
-                </div>
-                
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="fade-in card-hover bg-gray-700 rounded-lg overflow-hidden border border-gray-600">
-                        <div class="p-6">
-                            <div class="flex justify-center mb-4">
-                                <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center">
-                                    <img src="img/tryhackme.png"  class="w-11 h-11">
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-bold text-center text-white mb-2">Jr Penetration Tester Certificate</h3>
-                            <p class="text-gray-400 text-center">TryHackMe Path</p>
-                            <div class="text-center mt-4">
-                                <a href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-FTDBV0DYBN.png" target="_blank" class="text-blue-400 hover:underline">
-                                    View Certificate
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="fade-in card-hover bg-gray-700 rounded-lg overflow-hidden border border-gray-600">
-                        <div class="p-6">
-                            <div class="flex justify-center mb-4">
-                                <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center">
-                                    <img src="img/tryhackme.png"  class="w-11 h-11">
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-bold text-center text-white mb-2">Web Fundamentals Certificate</h3>
-                            <p class="text-gray-400 text-center">TryHackMe Path</p>
-                            <div class="text-center mt-4">
-                                <a href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-EUMPSGRMYS.png" target="_blank" class="text-blue-400 hover:underline">
-                                    View Certificate
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="fade-in card-hover bg-gray-700 rounded-lg overflow-hidden border border-gray-600">
-                        <div class="p-6">
-                            <div class="flex justify-center mb-4">
-                                <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center">
-                                    <img src="img/tryhackme.png"  class="w-11 h-11">
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-bold text-center text-white mb-2">Cyber Security 101 Certificate</h3>
-                            <p class="text-gray-400 text-center">TryHackMe Path</p>
-                            <div class="text-center mt-4">
-                                <a href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-OMMJ5FFVQC.png" target="_blank" class="text-blue-400 hover:underline">
-                                    View Certificate
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="fade-in card-hover bg-gray-700 rounded-lg overflow-hidden border border-gray-600">
-                        <div class="p-6">
-                            <div class="flex justify-center mb-4">
-                                <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center">
-                                    <img src="img/tryhackme.png"  class="w-11 h-11">
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-bold text-center text-white mb-2">Pre Security Certificate</h3>
-                            <p class="text-gray-400 text-center">TryHackMe Path</p>
-                            <div class="text-center mt-4">
-                                <a href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-FKRV7GZBU0.png" target="_blank" class="text-blue-400 hover:underline">
-                                    View Certificate
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                     
-                    <div class="fade-in card-hover bg-gray-700 rounded-lg overflow-hidden border border-gray-600">
-                        <div class="p-6">
-                            <div class="flex justify-center mb-4">
-                                <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center">
-                                    <img src="img/mastercard.png"  class="w-11 h-11">
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-bold text-center text-white mb-2">Cybersecurity Job Simulation</h3>
-                            <p class="text-gray-400 text-center">Mastercard</p>
-                            <div class="text-center mt-4">
-                                <a href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/mfxGwGDp6WkQmtmTf/vcKAB5yYAgvemepGQ_mfxGwGDp6WkQmtmTf_38mkzKpTSWJWPnqXn_1735152886527_completion_certificate.pdf" target="_blank" class="text-blue-400 hover:underline">
-                                    View Certificate
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="fade-in card-hover bg-gray-700 rounded-lg overflow-hidden border border-gray-600">
-                        <div class="p-6">
-                            <div class="flex justify-center mb-4">
-                                <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center">
-                                    <img src="img/linkedin.png"  class="w-12 h-12">
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-bold text-center text-white mb-2">Cybersecurity Awareness: Cybersecurity Terminology</h3>
-                            <p class="text-gray-400 text-center">LinkedIn</p>
-                            <div class="text-center mt-4">
-                                <a href="https://www.linkedin.com/learning/certificates/fb9cccf39d3581cfec4490951d32b7ba2ee3f553aa5b5a59e7dfacc81d6c1b42" target="_blank" class="text-blue-400 hover:underline">
-                                    View Certificate
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="fade-in card-hover bg-gray-700 rounded-lg overflow-hidden border border-gray-600">
-                        <div class="p-4">
-                            <div class="flex justify-center mb-3">
-                                <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center">
-                                    <img src="img/cisco.png"  class="w-12 h-12">
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-bold text-center text-white mb-2">Introduction to Cybersecurity</h3>
-                            <p class="text-gray-400 text-center">Cisco Networking Academy</p>
-                            <div class="text-center mt-4">
-                                <a href="https://www.credly.com/badges/0fd13947-9171-4654-b21b-61b0fd3bc8b4" target="_blank" class="text-blue-400 hover:underline">
-                                    View Certificate
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="fade-in card-hover bg-gray-700 rounded-lg overflow-hidden border border-gray-600">
-                        <div class="p-6">
-                            <div class="flex justify-center mb-4">
-                                <div class="w-16 h-16 bg-blue-500/10 rounded-full flex items-center justify-center">
-                                    <img src="img/eccouncil.png"  class="w-12 h-12">
-                                </div>
-                            </div>
-                            <h3 class="text-xl font-bold text-center text-white mb-2">Python for Absolute Beginners</h3>
-                            <p class="text-gray-400 text-center">EC-Council</p>
-                            <div class="text-center mt-4">
-                                <a href="https://eccommonstorage.blob.core.windows.net/codered/certificates/7036543f-e8ef-44ab-bc1d-9484535c283a.png" target="_blank" class="text-blue-400 hover:underline">
-                                    View Certificate
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-
-                <section id="tryhackme-profile" class="section-mb">
-                    <h2 class="section-title"><span class="icon">🎖️</span> TryHackMe Profile Badge</h2>
-                    <div class="tryhackme-badge">
-                        <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=2770387" style="border:none; width:100%; height:300px;"></iframe>
-                    </div>
-                </section>
-        <section id="projects" class="section-mb">
-            <h2 class="section-title"><span class="icon">📁</span> Projects</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="project-card">
-                     <h3 class="project-title">Project 1: Unified File and Directory Integrity Checker</h3>
-                    <p class="project-description">A versatile command-line tool for performing cryptographic integrity checks on files and directories. Implemented as a single Bash script, it provides a simple yet powerful solution for detecting unauthorized changes, verifying downloaded files, and ensuring data security.</p>
-                    <div class="project-tags">
-                        <span class="tag">Shell Bash</span>
-                        <span class="tag">Cryptography</span>
-                        <span class="tag">File Integrity</span>
-                        <span class="tag">Directory Integrity</span><br>
-                        <a href="https://github.com/surajapar/integrity_checker" target="_blank" rel="noopener noreferrer" class="btn btn-secondary bg-gray-700 hover:bg-blue-600 text-blue-400 hover:text-white border border-blue-400 rounded px-4 py-1 mt-2 font-semibold flex items-center justify-center gap-2 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="inline align-text-bottom" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                            GitHub Repo
+                    <div class="flex flex-wrap gap-4 pt-6">
+                        <a href="#projects" class="px-6 py-3 rounded-lg bg-brand-light dark:bg-brand-dark hover:bg-opacity-90 dark:hover:bg-opacity-90 text-white dark:text-slate-900 font-semibold transition-all shadow-lg flex items-center gap-2">
+                            View Projects <i class="ph ph-terminal-window"></i>
+                        </a>
+                        <a href="#contact" class="px-6 py-3 rounded-lg border-2 border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500 text-slate-700 dark:text-slate-300 transition-all flex items-center gap-2 font-medium">
+                            Get In Touch
                         </a>
                     </div>
-                    </div> 
-                 <div class="project-card">
-                    <p class="project-description"></p>
-                        Building real-world skills through hands-on labs and challenges — personal projects to be shared here.
-                    </p> <!--
-                     <h3 class="project-title">Project 2: Network Intrusion Detection System</h3>
-                     <p class="project-description">Implemented a network intrusion detection system using Wireshark and Snort to identify and log malicious network activity.</p>
-                     <div class="project-tags">
-                         <span class="tag">Wireshark</span>
-                         <span class="tag">Snort</span>
-                         <span class="tag">Network Analysis</span>
-                     </div>
-                     </div> -->
-            <!--     <div class="project-card">
-                    <h3 class="project-title">Project 3: Vulnerability Scanner</h3>
-                    <p class="project-description">Created a vulnerability scanner using Python and Nmap to identify open ports and potential vulnerabilities on target systems.</p>
-                    <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">Nmap</span>
-                        <span class="tag">Vulnerability Assessment</span>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="hidden md:flex justify-center relative reveal delay-200">
+                    <div class="w-80 h-80 relative group">
+                        <div class="absolute inset-0 border-2 border-brand-light dark:border-brand-dark rounded-2xl translate-x-5 translate-y-5 transition-transform duration-300 group-hover:translate-x-3 group-hover:translate-y-3 z-0"></div>
+                        <div class="absolute inset-0 bg-surface-light dark:bg-surface-dark rounded-2xl overflow-hidden z-10 flex items-center justify-center transition-transform duration-300 group-hover:-translate-x-1 group-hover:-translate-y-1 border border-slate-200 dark:border-slate-700 shadow-xl">
+                            <img src="img/avatar.png" alt="Suraj Apar" class="w-full h-full object-cover p-4 opacity-90 group-hover:opacity-100 transition-opacity bg-slate-100 dark:bg-slate-800">
+                        </div>
                     </div>
-                    </div>
-                 <div class="project-card">
-                     <h3 class="project-title">Project 4: Password Cracking Tool</h3>
-                     <p class="project-description">Built a password cracking tool using John the Ripper and hashcat to crack password hashes using various techniques.</p>
-                     <div class="project-tags">
-                         <span class="tag">John the Ripper</span>
-                         <span class="tag">Hashcat</span>
-                         <span class="tag">Password Cracking</span>
-                     </div>
-                     </div> -->
+                </div>
             </div>
         </section>
 
-        <section id="contact" class="section-mb">
-            <h2 class="section-title"><span class="icon">✉️</span> Contact Me</h2>
-            <div class="contact-form-card">
-                <form id="contact-form" class="space-y-6">
-                    <div class="form-group">
-                        <!-- <label for="name" class="form-label">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Your Name" class="form-input" required>
-                        <p class="form-error" id="name-error"></p>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Your Email" class="form-input" required>
-                         <p class="form-error" id="email-error"></p>
-                    </div>
-                     <div class="form-group">
-                         <label for="message" class="form-label">Message</label>
-                         <textarea id="message" name="message" placeholder="Your Message" rows="4" class="form-input form-textarea" required></textarea>
-                         <p class="form-error" id="message-error"></p>
-                     </div>
-                     <button type="submit" id="submit-button" class="btn btn-submit w-full">
-                         Send Message
-                     </button> -->
-                     <div id="form-status"></div>
-                 </form>
-             </div>
-             <div class="mt-8 flex justify-center space-x-6 social-links">
-                 <a href="https://github.com/surajapar" target="_blank" rel="noopener noreferrer" title="GitHub" class="social-link">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                 </a>
-                 <a href="https://linkedin.com/in/surajapar" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="social-link">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                 </a>
-                 <a href="mailto:aparsuraj@gmail.com" title="Email" class="social-link">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                 </a>
-             </div>
-         </section>
-     </main>
+        <!-- About Section -->
+        <section id="about" class="py-24 relative bg-slate-50 dark:bg-transparent border-y border-slate-200 dark:border-transparent">
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="flex items-center gap-4 mb-12 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white whitespace-nowrap"><span class="font-mono text-brand-light dark:text-brand-dark text-xl font-normal mr-2">01.</span>About Me</h2>
+                    <div class="h-[1px] w-full bg-slate-300 dark:bg-slate-700"></div>
+                </div>
 
-     <footer class="bg-gray-900 py-6 border-t border-gray-800">
-         <div class="container mx-auto px-4 text-center text-gray-400 text-sm">
-             &copy; <span id="current-year"></span> Suraj Apar. All rights reserved.
-         </div>
-     </footer>
+                <div class="grid md:grid-cols-3 gap-12 items-start">
+                    <div class="md:col-span-2 text-lg leading-relaxed space-y-6 reveal delay-100 text-slate-600 dark:text-slate-400">
+                        <p>
+                            Hello! I'm <strong class="text-slate-900 dark:text-white">Suraj Apar</strong>, a highly motivated cybersecurity student currently pursuing a Bachelor of Science in Cyber and Digital Science at Dr. D. Y. Patil Arts, Commerce & Science College, Pimpri, Pune.
+                        </p>
+                        <p>
+                            I'm deeply passionate about securing digital systems and networks. My goal is to leverage my skills to protect organizations from cyber threats and contribute to a safer digital world. I believe in continuous learning in this rapidly evolving field.
+                        </p>
+                        <p>
+                            When I'm not studying academically, I spend my time in practical, hands-on environments. You'll often find me on TryHackMe completing virtual job simulations, writing security tools, or publishing my findings on Medium.
+                        </p>
+                    </div>
+                    
+                    <!-- Quick Stats/Info -->
+                    <div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl shadow-lg border border-slate-200 dark:border-slate-800 reveal delay-200 h-fit">
+                        <h3 class="text-slate-900 dark:text-white font-bold mb-4 border-b border-slate-200 dark:border-slate-700 pb-2 flex items-center gap-2">
+                            <i class="ph ph-identification-card text-brand-light dark:text-brand-dark"></i> Profile Quick Look
+                        </h3>
+                        <ul class="space-y-4 font-mono text-sm text-slate-600 dark:text-slate-400">
+                            <li><span class="text-brand-light dark:text-brand-dark font-semibold">Education:</span><br>B.Sc Cyber & Digital Science</li>
+                            <li><span class="text-brand-light dark:text-brand-dark font-semibold">Graduation:</span><br>Expected 2028</li>
+                            <li><span class="text-brand-light dark:text-brand-dark font-semibold">Location:</span><br>Pune, India</li>
+                            <li><span class="text-brand-light dark:text-brand-dark font-semibold">Interests:</span><br>Web Security, SOC, Pentesting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Skills Section -->
+        <section id="skills" class="py-24">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex items-center gap-4 mb-16 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white whitespace-nowrap"><span class="font-mono text-brand-light dark:text-brand-dark text-xl font-normal mr-2">02.</span>Technical Arsenal</h2>
+                    <div class="h-[1px] w-full bg-slate-300 dark:bg-slate-700"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Tools -->
+                    <div class="bg-surface-light dark:bg-surface-dark p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 reveal hover:-translate-y-2 transition-transform duration-300 border-t-4 border-t-brand-light dark:border-t-brand-dark">
+                        <i class="ph ph-shield-check text-4xl text-brand-light dark:text-brand-dark mb-6 block"></i>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Security Tools</h3>
+                        <ul class="space-y-3 font-mono text-sm text-slate-600 dark:text-slate-400">
+                            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500"></i> Linux (Kali/Ubuntu)</li>
+                            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500"></i> Metasploit Framework</li>
+                            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500"></i> Burp Suite</li>
+                            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500"></i> Wireshark & Nmap</li>
+                            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500"></i> SQLMap & Hydra</li>
+                        </ul>
+                    </div>
+
+                    <!-- Domains -->
+                    <div class="bg-surface-light dark:bg-surface-dark p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 reveal delay-100 hover:-translate-y-2 transition-transform duration-300 border-t-4 border-t-indigo-500 dark:border-t-indigo-400">
+                        <i class="ph ph-radar text-4xl text-indigo-500 dark:text-indigo-400 mb-6 block"></i>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Core Competencies</h3>
+                        <ul class="space-y-3 font-mono text-sm text-slate-600 dark:text-slate-400">
+                            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500"></i> Web App Security (OWASP)</li>
+                            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500"></i> Vulnerability Assessment</li>
+                            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500"></i> Privilege Escalation</li>
+                            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500"></i> Network Defense</li>
+                            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500"></i> Security Operations (SOC)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Programming -->
+                    <div class="bg-surface-light dark:bg-surface-dark p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 reveal delay-200 hover:-translate-y-2 transition-transform duration-300 border-t-4 border-t-teal-500 dark:border-t-teal-400">
+                        <i class="ph ph-code text-4xl text-teal-500 dark:text-teal-400 mb-6 block"></i>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Programming</h3>
+                        <ul class="space-y-3 font-mono text-sm text-slate-600 dark:text-slate-400">
+                            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500"></i> Python (Automation/Scripts)</li>
+                            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500"></i> Bash / Shell Scripting</li>
+                            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500"></i> C Programming</li>
+                            <li class="flex items-center gap-3"><i class="ph-fill ph-check-circle text-green-500"></i> HTML, CSS, JS</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-200 dark:border-transparent">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="flex items-center gap-4 mb-16 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white whitespace-nowrap"><span class="font-mono text-brand-light dark:text-brand-dark text-xl font-normal mr-2">03.</span>Projects & Tools</h2>
+                    <div class="h-[1px] w-full bg-slate-300 dark:bg-slate-700"></div>
+                </div>
+
+                <div class="space-y-12">
+                    <!-- Project 1 -->
+                    <div class="bg-surface-light dark:bg-surface-dark p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 reveal relative overflow-hidden group">
+                        <!-- Decorative background element -->
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-brand-light/5 dark:bg-brand-dark/10 rounded-bl-full -z-10 group-hover:scale-110 transition-transform"></div>
+                        
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+                            <div>
+                                <p class="font-mono text-brand-light dark:text-brand-dark text-sm mb-2 font-semibold flex items-center gap-2"><i class="ph ph-star text-yellow-500"></i> Featured Project</p>
+                                <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Unified File & Directory Integrity Checker</h3>
+                            </div>
+                            <a href="https://github.com/surajapar/integrity_checker" target="_blank" class="flex items-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg text-slate-700 dark:text-slate-300 transition-colors font-medium border border-slate-300 dark:border-slate-700">
+                                <i class="ph ph-github-logo text-xl"></i> Source Code
+                            </a>
+                        </div>
+                        
+                        <p class="text-slate-600 dark:text-slate-400 text-base mb-6 max-w-4xl leading-relaxed">
+                            A versatile command-line tool for performing cryptographic integrity checks on files and directories. Implemented as a single Bash script, it provides a simple yet powerful solution for detecting unauthorized changes, verifying downloaded files, and ensuring data security. Designed to support incident response functions.
+                        </p>
+                        
+                        <ul class="flex flex-wrap gap-3 font-mono text-sm text-slate-600 dark:text-slate-300">
+                            <li class="bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-md border border-slate-200 dark:border-slate-700">Shell Scripting (Bash)</li>
+                            <li class="bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-md border border-slate-200 dark:border-slate-700">Cryptography</li>
+                            <li class="bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-md border border-slate-200 dark:border-slate-700">File Integrity Monitoring</li>
+                        </ul>
+                    </div>
+
+                    <!-- Upcoming Projects Note -->
+                    <div class="p-8 rounded-2xl reveal delay-100 border-2 border-dashed border-slate-300 dark:border-slate-700 text-center bg-transparent">
+                        <i class="ph ph-code-block text-4xl text-slate-400 dark:text-slate-500 mb-4 block"></i>
+                        <h3 class="text-xl font-bold text-slate-800 dark:text-slate-200 mb-2">More in Development</h3>
+                        <p class="text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">
+                            Currently building real-world skills through hands-on labs and challenges. New personal tools and vulnerability assessment scripts will be shared here soon.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Medium Blog Section -->
+        <section id="blog" class="py-24 relative">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex items-center justify-between gap-4 mb-12 reveal">
+                    <div class="flex items-center gap-4 flex-1">
+                        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white whitespace-nowrap"><span class="font-mono text-brand-light dark:text-brand-dark text-xl font-normal mr-2">04.</span>Latest Writings</h2>
+                        <div class="h-[1px] w-full bg-slate-300 dark:bg-slate-700"></div>
+                    </div>
+                    <a href="https://surajapar.medium.com/" target="_blank" class="hidden md:flex items-center gap-2 text-sm font-medium text-brand-light dark:text-brand-dark hover:underline whitespace-nowrap">
+                        View Medium <i class="ph ph-arrow-up-right"></i>
+                    </a>
+                </div>
+
+                <!-- Blog Container (Populated via JS) -->
+                <div id="blog-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Loading Skeleton -->
+                    <div class="bg-surface-light dark:bg-surface-dark rounded-xl p-4 shadow-lg border border-slate-200 dark:border-slate-800 animate-pulse">
+                        <div class="w-full h-48 bg-slate-200 dark:bg-slate-700 rounded-lg mb-4"></div>
+                        <div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/4 mb-4"></div>
+                        <div class="h-6 bg-slate-200 dark:bg-slate-700 rounded w-3/4 mb-3"></div>
+                        <div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-full mb-2"></div>
+                        <div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-2/3"></div>
+                    </div>
+                    <div class="bg-surface-light dark:bg-surface-dark rounded-xl p-4 shadow-lg border border-slate-200 dark:border-slate-800 animate-pulse hidden md:block">
+                        <div class="w-full h-48 bg-slate-200 dark:bg-slate-700 rounded-lg mb-4"></div>
+                        <div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/4 mb-4"></div>
+                        <div class="h-6 bg-slate-200 dark:bg-slate-700 rounded w-3/4 mb-3"></div>
+                        <div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-full mb-2"></div>
+                        <div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-2/3"></div>
+                    </div>
+                    <div class="bg-surface-light dark:bg-surface-dark rounded-xl p-4 shadow-lg border border-slate-200 dark:border-slate-800 animate-pulse hidden lg:block">
+                        <div class="w-full h-48 bg-slate-200 dark:bg-slate-700 rounded-lg mb-4"></div>
+                        <div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-1/4 mb-4"></div>
+                        <div class="h-6 bg-slate-200 dark:bg-slate-700 rounded w-3/4 mb-3"></div>
+                        <div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-full mb-2"></div>
+                        <div class="h-4 bg-slate-200 dark:bg-slate-700 rounded w-2/3"></div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 text-center md:hidden">
+                    <a href="https://surajapar.medium.com/" target="_blank" class="inline-flex items-center gap-2 text-sm font-medium text-brand-light dark:text-brand-dark hover:underline">
+                        View all posts on Medium <i class="ph ph-arrow-up-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications & Badges -->
+        <section id="certifications" class="py-24 bg-slate-50 dark:bg-slate-900/50 border-y border-slate-200 dark:border-transparent">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex items-center gap-4 mb-12 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white whitespace-nowrap"><span class="font-mono text-brand-light dark:text-brand-dark text-xl font-normal mr-2">05.</span>Certifications</h2>
+                    <div class="h-[1px] w-full bg-slate-300 dark:bg-slate-700"></div>
+                </div>
+
+                <!-- Grid of Certifications -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                    
+                    <!-- THM 1 -->
+                    <div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-md border border-slate-200 dark:border-slate-800 overflow-hidden hover:-translate-y-2 transition-transform duration-300 reveal group">
+                        <div class="p-6 text-center">
+                            <div class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 p-3 group-hover:scale-110 transition-transform">
+                                <img src="img/tryhackme.png" alt="TryHackMe" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Jr Penetration Tester</h3>
+                            <p class="text-brand-light dark:text-brand-dark text-sm font-mono mb-4">TryHackMe Path</p>
+                            <a href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-FTDBV0DYBN.png" target="_blank" class="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-300 dark:border-slate-600 rounded px-3 py-1 transition-colors">Verify Credential</a>
+                        </div>
+                    </div>
+
+                    <!-- THM 2 -->
+                    <div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-md border border-slate-200 dark:border-slate-800 overflow-hidden hover:-translate-y-2 transition-transform duration-300 reveal delay-100 group">
+                        <div class="p-6 text-center">
+                            <div class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 p-3 group-hover:scale-110 transition-transform">
+                                <img src="img/tryhackme.png" alt="TryHackMe" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Web Fundamentals</h3>
+                            <p class="text-brand-light dark:text-brand-dark text-sm font-mono mb-4">TryHackMe Path</p>
+                            <a href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-EUMPSGRMYS.png" target="_blank" class="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-300 dark:border-slate-600 rounded px-3 py-1 transition-colors">Verify Credential</a>
+                        </div>
+                    </div>
+
+                    <!-- THM 3 -->
+                    <div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-md border border-slate-200 dark:border-slate-800 overflow-hidden hover:-translate-y-2 transition-transform duration-300 reveal delay-200 group">
+                        <div class="p-6 text-center">
+                            <div class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 p-3 group-hover:scale-110 transition-transform">
+                                <img src="img/tryhackme.png" alt="TryHackMe" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Cyber Security 101</h3>
+                            <p class="text-brand-light dark:text-brand-dark text-sm font-mono mb-4">TryHackMe Path</p>
+                            <a href="https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-OMMJ5FFVQC.png" target="_blank" class="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-300 dark:border-slate-600 rounded px-3 py-1 transition-colors">Verify Credential</a>
+                        </div>
+                    </div>
+
+                    <!-- Mastercard -->
+                    <div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-md border border-slate-200 dark:border-slate-800 overflow-hidden hover:-translate-y-2 transition-transform duration-300 reveal delay-300 group">
+                        <div class="p-6 text-center">
+                            <div class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 p-3 group-hover:scale-110 transition-transform">
+                                <img src="img/mastercard.png" alt="Mastercard" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Job Simulation</h3>
+                            <p class="text-orange-500 text-sm font-mono mb-4">Mastercard</p>
+                            <a href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/mfxGwGDp6WkQmtmTf/vcKAB5yYAgvemepGQ_mfxGwGDp6WkQmtmTf_38mkzKpTSWJWPnqXn_1735152886527_completion_certificate.pdf" target="_blank" class="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-300 dark:border-slate-600 rounded px-3 py-1 transition-colors">Verify Credential</a>
+                        </div>
+                    </div>
+
+                    <!-- LinkedIn -->
+                    <div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-md border border-slate-200 dark:border-slate-800 overflow-hidden hover:-translate-y-2 transition-transform duration-300 reveal group">
+                        <div class="p-6 text-center">
+                            <div class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 p-3 group-hover:scale-110 transition-transform">
+                                <img src="img/linkedin.png" alt="LinkedIn" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Cyber Terminology</h3>
+                            <p class="text-blue-600 dark:text-blue-400 text-sm font-mono mb-4">LinkedIn Learning</p>
+                            <a href="https://www.linkedin.com/learning/certificates/fb9cccf39d3581cfec4490951d32b7ba2ee3f553aa5b5a59e7dfacc81d6c1b42" target="_blank" class="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-300 dark:border-slate-600 rounded px-3 py-1 transition-colors">Verify Credential</a>
+                        </div>
+                    </div>
+
+                    <!-- Cisco -->
+                    <div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-md border border-slate-200 dark:border-slate-800 overflow-hidden hover:-translate-y-2 transition-transform duration-300 reveal delay-100 group">
+                        <div class="p-6 text-center">
+                            <div class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 p-3 group-hover:scale-110 transition-transform">
+                                <img src="img/cisco.png" alt="Cisco" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Intro to CyberSec</h3>
+                            <p class="text-cyan-600 dark:text-cyan-400 text-sm font-mono mb-4">Cisco Academy</p>
+                            <a href="https://www.credly.com/badges/0fd13947-9171-4654-b21b-61b0fd3bc8b4" target="_blank" class="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-300 dark:border-slate-600 rounded px-3 py-1 transition-colors">Verify Credential</a>
+                        </div>
+                    </div>
+
+                    <!-- EC-Council -->
+                    <div class="bg-surface-light dark:bg-surface-dark rounded-xl shadow-md border border-slate-200 dark:border-slate-800 overflow-hidden hover:-translate-y-2 transition-transform duration-300 reveal delay-200 group">
+                        <div class="p-6 text-center">
+                            <div class="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 p-3 group-hover:scale-110 transition-transform">
+                                <img src="img/eccouncil.png" alt="EC-Council" class="w-full h-full object-contain">
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Python Beginners</h3>
+                            <p class="text-red-600 dark:text-red-400 text-sm font-mono mb-4">EC-Council</p>
+                            <a href="https://eccommonstorage.blob.core.windows.net/codered/certificates/7036543f-e8ef-44ab-bc1d-9484535c283a.png" target="_blank" class="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-300 dark:border-slate-600 rounded px-3 py-1 transition-colors">Verify Credential</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TryHackMe Badge iframe -->
+                <div class="bg-surface-light dark:bg-surface-dark p-6 md:p-8 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 reveal mx-auto max-w-3xl text-center">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6 flex justify-center items-center gap-2">
+                        <i class="ph-fill ph-target text-red-500"></i> Live TryHackMe Stats
+                    </h3>
+                    <div class="w-full overflow-hidden rounded-lg bg-slate-100 dark:bg-slate-900 flex justify-center py-4 thm-container">
+                        <iframe src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=2770387" style="border:none; width:100%; height:300px; max-width: 400px;" title="TryHackMe Badge"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-32 relative text-center">
+            <div class="max-w-2xl mx-auto px-6 reveal">
+                <p class="font-mono text-brand-light dark:text-brand-dark mb-4 font-semibold">06. What's Next?</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6">Get In Touch</h2>
+                <p class="text-slate-600 dark:text-slate-400 text-lg mb-10 leading-relaxed">
+                    Whether you have a question, an opportunity, or just want to discuss cybersecurity and technology, my inbox is always open. I'll try my best to get back to you!
+                </p>
+                <a href="mailto:aparsuraj@gmail.com" class="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-brand-light dark:bg-brand-dark hover:bg-opacity-90 text-white dark:text-slate-900 font-bold shadow-lg transition-transform hover:-translate-y-1">
+                    <i class="ph ph-paper-plane-tilt text-xl"></i> Send an Email
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center text-slate-500 dark:text-slate-500 font-mono text-sm border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+        <div class="flex justify-center gap-8 mb-6">
+            <a href="https://github.com/surajapar" target="_blank" aria-label="GitHub" class="text-slate-400 hover:text-brand-light dark:hover:text-brand-dark transition-colors flex flex-col items-center gap-1">
+                <i class="ph-fill ph-github-logo text-3xl"></i>
+            </a>
+            <a href="https://linkedin.com/in/surajapar" target="_blank" aria-label="LinkedIn" class="text-slate-400 hover:text-brand-light dark:hover:text-brand-dark transition-colors flex flex-col items-center gap-1">
+                <i class="ph-fill ph-linkedin-logo text-3xl"></i>
+            </a>
+            <a href="https://tryhackme.com/p/surajapar" target="_blank" aria-label="TryHackMe" class="text-slate-400 hover:text-brand-light dark:hover:text-brand-dark transition-colors flex flex-col items-center gap-1">
+                <i class="ph-fill ph-shield-chevron text-3xl"></i>
+            </a>
+        </div>
+        <p>
+            <a href="https://github.com/surajapar/surajapar.github.io" target="_blank" class="hover:text-brand-light dark:hover:text-brand-dark transition-colors">
+                Designed & Built by Suraj Apar
+            </a>
+        </p>
+        <p class="mt-2 text-xs opacity-60">&copy; <span id="year"></span> All rights reserved.</p>
+    </footer>
+
+    <!-- Fixed Desktop Navigation Items -->
+    <div class="hidden md:block fixed left-10 bottom-0 z-40">
+        <div class="flex flex-col items-center gap-6 after:content-[''] after:w-[1px] after:h-24 after:bg-slate-300 dark:after:bg-slate-700">
+            <a href="https://github.com/surajapar" target="_blank" aria-label="GitHub" class="text-slate-400 hover:text-brand-light dark:hover:text-brand-dark hover:-translate-y-1 transition-all">
+                <i class="ph-fill ph-github-logo text-2xl"></i>
+            </a>
+            <a href="https://linkedin.com/in/surajapar" target="_blank" aria-label="LinkedIn" class="text-slate-400 hover:text-brand-light dark:hover:text-brand-dark hover:-translate-y-1 transition-all mb-4">
+                <i class="ph-fill ph-linkedin-logo text-2xl"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="hidden md:block fixed right-10 bottom-0 z-40">
+        <div class="flex flex-col items-center gap-6 after:content-[''] after:w-[1px] after:h-24 after:bg-slate-300 dark:after:bg-slate-700">
+            <a href="mailto:aparsuraj@gmail.com" class="text-slate-400 hover:text-brand-light dark:hover:text-brand-dark hover:-translate-y-1 transition-all font-mono text-sm tracking-widest" style="writing-mode: vertical-rl; margin-bottom: 20px;">
+                aparsuraj@gmail.com
+            </a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
