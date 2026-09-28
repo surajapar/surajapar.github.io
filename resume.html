@@ -101,6 +101,8 @@
     /* ── Certs ── */
     ul.certs { margin: 0 0 0 18px; list-style: disc; }
     ul.certs li { margin-bottom: 5px; font-size: 13px; }
+    ul.certs a { color: #1a5fa8; text-decoration: none; }
+    ul.certs a:hover { text-decoration: underline; }
 
     /* ── Languages ── */
     .langs { font-size: 13px; color: #333; }
@@ -122,7 +124,7 @@
   <!-- ════ HEADER ════ -->
   <div class="header">
     <h1>Suraj Apar</h1>
-    <div class="subtitle">Cybersecurity Student | Offensive Security | SOC &amp; Threat Detection</div>
+    <div class="subtitle">Junior Penetration Tester | eJPT Certified | VAPT &amp; Offensive Security</div>
     <div class="contact-line">
       <a href="mailto:aparsuraj@gmail.com">aparsuraj@gmail.com</a>
       <span>|</span>
@@ -137,7 +139,9 @@
       <span>|</span>
       <a href="https://surajapar.github.io/Personal-Portfolio" target="_blank">Portfolio</a>
       <span>|</span>
-      <a href="https://tryhackme.com/p/surajapar" target="_blank">TryHackMe (Level 10 – Master)</a>
+      <a href="https://tryhackme.com/p/surajapar" target="_blank">TryHackMe</a>
+      <span>|</span>
+      <a href="https://profile.hackthebox.com/profile/019ce341-e7b7-70ae-9590-13c652988ccd" target="_blank">Hack The Box</a>
       <span>|</span>
       <a href="https://surajapar.medium.com/" target="_blank">Medium Blog</a>
     </div>
@@ -147,7 +151,7 @@
   <div class="section">
     <div class="section-title">Professional Summary</div>
     <p style="font-size:13px;">
-      Entry-level cybersecurity professional pursuing a B.Sc. in Cyber &amp; Digital Science, with demonstrated hands-on skills in penetration testing, vulnerability assessment, and web application security. Completed 4 structured TryHackMe learning paths including Junior Penetration Tester, achieving Level 10 Master rank — placing in approximately the top 5% of platform users. Published security blogs in InfoSec Write-ups (Medium). Proficient in industry-standard tools including Burp Suite, Nmap, Metasploit, and Wireshark. Seeking an entry-level SOC Analyst, Junior Penetration Tester, or Security Analyst role where hands-on skills and self-driven learning can deliver immediate value.
+      Cybersecurity student with a hands-on foundation in penetration testing fundamentals: OWASP Top 10, vulnerability assessment, and Python/Bash scripting, backed by an eJPT (eLearnSecurity Junior Penetration Tester) certification. Ranked in the top 1% on TryHackMe (Legend, 221 rooms completed) and at Professional rank on Hack The Box (Level 52), with practical lab experience identifying, exploiting, and documenting vulnerabilities across web applications and networked systems. Published 14 lab writeups on Medium documenting host and network penetration testing methodology. Pursuing HTB Certified Penetration Testing Specialist (CPTS), with lab practice in reconnaissance, exploitation, and post-exploitation. Seeking a Junior Penetration Tester / VAPT role, contributing to web, network, and application security assessments.
     </p>
   </div>
 
@@ -157,11 +161,7 @@
     <table class="skills-table">
       <tr>
         <td>Offensive Security Tools</td>
-        <td>Burp Suite, Nmap, Metasploit Framework (MSF), SQLMap, Hydra, Gobuster, Netcat</td>
-      </tr>
-      <tr>
-        <td>Defensive / SOC Tools</td>
-        <td>Wireshark (packet analysis), log analysis, intrusion detection concepts</td>
+        <td>Burp Suite, Nmap, Metasploit Framework (MSF), SQLMap, Hydra, Gobuster, Netcat, Wireshark</td>
       </tr>
       <tr>
         <td>Frameworks &amp; Standards</td>
@@ -169,7 +169,7 @@
       </tr>
       <tr>
         <td>Security Domains</td>
-        <td>Web Application Security, Network Reconnaissance &amp; Scanning, Windows &amp; Linux Privilege Escalation, Service Enumeration &amp; Fingerprinting, Vulnerability Assessment &amp; Reporting, Security Auditing Fundamentals, Digital Forensics (Introductory), Incident Response Concepts</td>
+        <td>Web Application Security, Network Reconnaissance &amp; Scanning, Password Attacks &amp; Hash Cracking, Windows &amp; Linux Privilege Escalation, Post-Exploitation, Service Enumeration &amp; Fingerprinting, Vulnerability Assessment, Digital Forensics (Introductory)</td>
       </tr>
       <tr>
         <td>Operating Systems</td>
@@ -199,27 +199,27 @@
       <div class="entry-org">Personal Project</div>
       <ul class="bullets">
         <li>Engineered a Bash-based cryptographic integrity verification tool that hashes files and directories and flags unauthorized modifications — directly applicable to host-based intrusion detection.</li>
-        <li>Automated detection of tampered files using SHA-256 hashing, reducing manual verification effort by ~60–70% (estimated).</li>
-        <li>Designed tool output to mirror incident response workflows, producing structured alerts consumable by a SOC analyst during a live investigation.</li>
+        <li>Automated detection of tampered files using SHA-256 hashing, reducing manual verification effort.</li>
+        <li>Structured alert output for clear, actionable reporting of detected changes.</li>
         <li>Demonstrates core skills: Bash scripting, file system forensics, security automation, and understanding of integrity-based detection.</li>
       </ul>
     </div>
   </div>
 
-  <!-- ════ SECURITY RESEARCH & PUBLICATIONS ════ -->
+  <!-- ════ LAB WRITEUPS ════ -->
   <div class="section">
-    <div class="section-title">Security Research &amp; Publications</div>
+    <div class="section-title">Lab Writeups</div>
     <div class="entry">
       <div class="entry-header">
-        <span class="entry-title">Technical Author — InfoSec Write-ups (Medium)</span>
-        <span class="entry-date">2025</span>
+        <span class="entry-title">Contributor — InfoSec Write-ups (Medium)</span>
       </div>
       <ul class="bullets">
+        <li style="list-style-type: none; margin-left: -18px;">14 published writeups: 11 eJPT (INE) lab walkthroughs covering vulnerability assessment, host and network attacks, Metasploit, exploitation and post-exploitation, plus a 3-part Nmap and networking fundamentals series. <a href="https://surajapar.medium.com/" target="_blank">All writeups on Medium</a>. Selected:</li>
         <li>"<a href="https://infosecwriteups.com/before-you-touch-nmap-networking-fundamentals-every-beginner-must-understand-b65ea907ca87" target="_blank">Before You Touch Nmap: Networking Fundamentals Every Beginner Must Understand (Part 1)</a>" <br> <i style="color: rgb(147, 147, 147);">Covers TCP/IP, subnetting, OSI model, DNS, and their application to network reconnaissance — demonstrates foundational knowledge essential for both offensive and defensive roles.</i></li>
         <li>"<a href="https://surajapar.medium.com/nmap-host-discovery-finding-targets-without-making-noise-part-2-8f52f35cde6a" target="_blank">Nmap Host Discovery — Finding Targets Without Making Noise (Part 2)</a>" <br> <i style="color: rgb(147, 147, 147);">Deep dives into stealth scanning techniques, host discovery flags, and minimising detection footprint — demonstrates practical offensive reconnaissance skills.</i></li>
-        <li>"<a href="https://infosecwriteups.com/host-network-penetration-testing-system-host-based-attacks-ctf-2-ejpt-ine-9c11f35cbcd6" target="_blank">Host & Network Penetration Testing: System/Host Based Attacks CTF-2 — eJPT (INE)</a>" <br> <i style="color: rgb(147, 147, 147);">Documents exploitation of Windows and Linux vulnerabilities including privilege escalation and service abuse — demonstrates structured methodology and technical reporting ability.</i></li>
+        <li>"<a href="https://infosecwriteups.com/host-network-penetration-testing-system-host-based-attacks-ctf-2-ejpt-ine-9c11f35cbcd6" target="_blank">Host &amp; Network Penetration Testing: System/Host Based Attacks CTF-2 — eJPT (INE)</a>" <br> <i style="color: rgb(147, 147, 147);">Documents exploitation of Windows and Linux vulnerabilities including privilege escalation and service abuse — demonstrates structured methodology and technical reporting ability.</i></li>
         <li>"<a href="https://infosecwriteups.com/assessment-methodologies-vulnerability-assessment-ctf-1-ejpt-ine-f487e0b2cef5" target="_blank">Vulnerability Assessment CTF-1 — eJPT (INE)</a>" <br> <i style="color: rgb(147, 147, 147);">Documents web enumeration, hidden endpoint discovery, and vulnerability identification methodology used in a structured assessment simulation.</i></li>
-        <li style="color: rgb(147, 147, 147);list-style-type: none;">Technical writing demonstrates ability to produce clear, structured security documentation — a core deliverable in both penetration testing (reports) and SOC (incident reports) roles.</li>
+        <li style="color: rgb(147, 147, 147);list-style-type: none;">Technical writing demonstrates the ability to document security findings clearly and in a structured way.</li>
       </ul>
     </div>
   </div>
@@ -229,22 +229,35 @@
     <div class="section-title">Hands-On Lab Training — TryHackMe</div>
     <div class="entry">
       <div class="entry-header">
-        <span class="entry-title">Platform Rank: Level 10 – 0xB [Master] — TryHackMe</span>
-        <span class="entry-date">2024 – 2025</span>
+        <span class="entry-title">Platform Rank: 0xD [Legend] — TryHackMe</span>
       </div>
       <ul class="bullets">
         <li>Completed Junior Penetration Tester path: covered reconnaissance, exploitation, post-exploitation, web hacking.</li>
         <li>Completed Web Fundamentals path: OWASP Top 10 vulnerabilities (SQLi, XSS, IDOR, broken auth), BurpSuite interception, and web enumeration techniques.</li>
-        <li>Completed Cyber Security 101 path: SOC fundamentals, threat intelligence, SIEM concepts, log analysis, and incident triage workflows.</li>
+        <li>Completed Cyber Security 101 path, which covers SOC fundamentals, threat intelligence, SIEM concepts, and log analysis.</li>
         <li>Completed Pre-Security path: networking (TCP/IP, DNS, HTTP), Linux command line, and Windows Active Directory fundamentals.</li>
-        <li>Master rank places in approximately the top 5% of TryHackMe's active user base — demonstrating consistent, measurable skill progression.</li>
+        <li>Top 1% of TryHackMe users, with 221 rooms completed and 33 badges.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════ HACK THE BOX ════ -->
+  <div class="section">
+    <div class="section-title">Hands-On Lab Training — Hack The Box</div>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title"><a href="https://profile.hackthebox.com/profile/019ce341-e7b7-70ae-9590-13c652988ccd" target="_blank">Platform Rank: Professional (Level 52) — Hack The Box</a></span>
+      </div>
+      <ul class="bullets">
+        <li>Pursuing the Certified Penetration Testing Specialist (CPTS) learning path.</li>
+        <li>33,985 XP earned across 10 active weeks.</li>
       </ul>
     </div>
   </div>
 
   <!-- ════ EXPERIENCE ════ -->
   <div class="section">
-    <div class="section-title">Experience</div>
+    <div class="section-title">Experience &amp; Simulations</div>
     <div class="entry">
       <div class="entry-header">
         <span class="entry-title">Cybersecurity Analyst Simulation — Mastercard (via Forage)</span>
@@ -262,7 +275,8 @@
   <div class="section">
     <div class="section-title">Certifications</div>
     <ul class="certs">
-      <li>Junior Penetration Tester, Web Fundamentals, Cyber Security 101 & Pre-Security Learning Paths — TryHackMe | 2025</li>
+      <li><a href="https://certs.ine.com/fe0529c8-dd70-414a-a664-14a3e9ae5708#acc.drWuHVsK" target="_blank">eJPT — eLearnSecurity Junior Penetration Tester, INE | 2026</a></li>
+      <li>Junior Penetration Tester, Web Fundamentals, Cyber Security 101 &amp; Pre-Security Learning Paths — TryHackMe | 2025</li>
       <li>Introduction to Cybersecurity — Cisco Networking Academy | 2024</li>
       <li>Cybersecurity Terminology — LinkedIn Learning | 2024</li>
     </ul>
@@ -278,6 +292,7 @@
       </div>
       <div class="entry-org">Dr. D.Y. Patil Arts, Commerce &amp; Science College, Pune</div>
       <div style="font-size:12.5px;color:#555;margin-top:2px;font-style:italic;">Affiliated to Savitribai Phule Pune University</div>
+      <div style="font-size:12.5px;color:#555;margin-top:2px;">Average SGPA: 8.56 (Semesters 1–4)</div>
     </div>
   </div>
 
